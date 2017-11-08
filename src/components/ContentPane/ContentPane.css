@@ -1,0 +1,7 @@
+.ContentPane { 
+	position: relative;
+    outline: none;
+    background-color: green;
+    align-content: center;
+    vertical-align: center;
+}

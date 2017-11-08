@@ -1,0 +1,8 @@
+.ContentContainer {
+	flex: 1 1 0%;
+    display: flex;
+    flex-direction: row;
+    min-height: calc(100vh - 105px);
+    position: relative;
+    background-color: green;
+}
