@@ -1,0 +1,14 @@
+.ContentTopbar { 
+    position:absolute;   
+    display: flex;
+    -ms-flex-align: justify-content;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-around;
+    padding: 0 20px;
+    height: 20px;
+    background-color: orange;
+    box-sizing: border-box;
+    user-select: none;
+    width:100%;
+    }

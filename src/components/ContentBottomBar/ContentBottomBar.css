@@ -1,12 +1,15 @@
-.Topbar {    
+.ContentBottomBar { 
+    position: absolute;
+    bottom:10px;
     display: flex;
     -ms-flex-align: center;
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
-    padding: 0 20px;
-    height: 80px;
-    background-color: red;
+    height: 20px;
+    width:100%;
+    background-color: yellow;
     box-sizing: border-box;
     user-select: none;
+    vertical-align: bottom;
     }

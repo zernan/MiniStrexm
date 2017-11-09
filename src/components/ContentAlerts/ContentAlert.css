@@ -1,0 +1,10 @@
+.ContentAlert { 
+    position: absolute;
+    top:100px;
+    left:300px;
+    display: flex;
+    justify-content: space-between;
+    height: 40px;
+    width:300px;
+    background-color: gray;
+    }

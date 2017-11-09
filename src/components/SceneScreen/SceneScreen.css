@@ -1,6 +1,8 @@
 .SceneScreen {
+	position:relative;
 	outline: black;
-    background-image: url('http://graphicarea.net/wp-content/uploads/2016/01/Asiimov-Twitch-Overlay-Download1.png');
+    /*background-image: url('http://graphicarea.net/wp-content/uploads/2016/01/Asiimov-Twitch-Overlay-Download1.png');*/
+    background-color: white;
     background-size: 100% 100%;
 	height:550px;
 	width:900px;

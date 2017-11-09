@@ -1,0 +1,9 @@
+.ContentWebCam {    
+    position: absolute;
+    height: 100px;
+    width:150px;
+    border-width: 2px;
+    border-style: double;
+    top:200px;
+    left:50px;
+}
