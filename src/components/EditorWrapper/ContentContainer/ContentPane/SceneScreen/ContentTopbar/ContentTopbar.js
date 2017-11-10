@@ -11,6 +11,8 @@ class ContentTopbar extends Component {
   }
   
   render() {
+    if(this.props.visible == true)
+    {
     return (
       <div className="ContentTopbar">
         	<ContentTopbarFollower />
@@ -18,6 +20,8 @@ class ContentTopbar extends Component {
         	<ContentTopbarTip />
       </div>
     );
+    }
+    else {return null;}
   }
 }
 

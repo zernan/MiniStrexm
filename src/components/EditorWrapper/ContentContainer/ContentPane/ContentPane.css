@@ -1,7 +1,8 @@
 .ContentPane { 
 	position: relative;
-    outline: none;
-    background-color: green;
+	outline: none;
+    background-color: #2ecc71;
     align-content: center;
     vertical-align: center;
+    margin-left: 10px;    
 }

@@ -24,11 +24,15 @@ class ContentBottomBar extends Component {
 
 
   render() {
+    if(this.props.visible == true)
+    {
     return (
       <div className="ContentBottomBar">
         	{this.createSocialItems()}
       </div>
     );
+    }
+    else {return null;}
   }
 }
 

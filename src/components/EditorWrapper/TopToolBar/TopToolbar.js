@@ -5,7 +5,9 @@ class TopToolbar extends Component {
   render() {
     return (
       <div className="TopToolbar">
-        	TOPTOOLBAR
+        	<span>
+        	<button> SAVE </button>
+        	</span>
       </div>
     );
   }

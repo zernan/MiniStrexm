@@ -8,11 +8,18 @@ class ContentAlert extends Component {
   }
   
   render() {
+    if(this.props.visible == true)
+    {
     return (
       <div className="ContentAlert">
-        	ALERT : {this.props.alert} !!!
+        	ALERT : {this.props.alert[0]} !!!
       </div>
     );
+    }
+    else
+    {
+      return null;
+    }
   }
 }
 

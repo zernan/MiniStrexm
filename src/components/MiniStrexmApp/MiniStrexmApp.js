@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import logo from '../../logo.svg';
 import './MiniStrexmApp.css';
-import EditorWrapper from '../EditorWrapper/EditorWrapper'
+import EditorWrapper from '../EditorWrapper/EditorWrapper';
+import TopToolbar from '../EditorWrapper/TopToolBar/TopToolbar';
+import ContentContainer from '../EditorWrapper/ContentContainer/ContentContainer';
+
 
 class MiniStrexmApp extends Component {
   render() {
@@ -11,7 +14,7 @@ class MiniStrexmApp extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">MiniStrexmApp</h1>
         </header>
-        <EditorWrapper />
+         {this.props.children}
       </div>
     );
   }

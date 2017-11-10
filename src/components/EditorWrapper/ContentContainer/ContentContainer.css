@@ -4,5 +4,5 @@
     flex-direction: row;
     min-height: calc(100vh - 105px);
     position: relative;
-    background-color: green;
+    background-color: #2ecc71;
 }
