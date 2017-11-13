@@ -4,7 +4,7 @@ class ContentTopbarTip extends Component {
   render() {
     return (
       <div className="ContentTopbarTip">
-        	Tips
+        	<h5>Tips</h5>
       </div>
     );
   }

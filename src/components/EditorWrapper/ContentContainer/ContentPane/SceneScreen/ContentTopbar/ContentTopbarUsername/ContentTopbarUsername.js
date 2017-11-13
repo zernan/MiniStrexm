@@ -4,7 +4,7 @@ class ContentTopbarUsername extends Component {
   render() {
     return (
       <div className="ContentTopbarUsername">
-        	NAME
+        	<h3>NAME</h3>
       </div>
     );
   }

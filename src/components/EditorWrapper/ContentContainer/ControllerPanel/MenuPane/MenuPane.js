@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './MenuPane.css';
 import Checkbox from '../../../../../components/checkbox/CheckBox';
 
-const items = ['Alerts', 'Top Bar', 'Bottom Bar', 'Webcam 16:9'];
+const items = ['Alerts', 'TopBar', 'BottomBar', 'WebCam'];
 
 class MenuPane extends Component {
 

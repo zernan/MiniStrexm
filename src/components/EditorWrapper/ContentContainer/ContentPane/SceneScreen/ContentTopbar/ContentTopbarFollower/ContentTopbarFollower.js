@@ -4,7 +4,7 @@ class ContentTopbarFollower extends Component {
   render() {
     return (
       <div className="ContentTopbarFollower">
-        	Followers
+        	<h5> Followers </h5>
       </div>
     );
   }

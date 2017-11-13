@@ -2,14 +2,15 @@
     position: absolute;
     bottom:10px;
     display: flex;
-    -ms-flex-align: center;
+    -ms-flex-align: justify-content;
     align-items: center;
     -ms-flex-pack: justify;
     justify-content: space-between;
+    padding: 0 20px;
     height: 20px;
     width:100%;
-    background-color: yellow;
+    background-image: url('https://image.shutterstock.com/display_pic_with_logo/2439758/299489873/stock-photo-blurred-city-night-background-299489873.jpg');
+    background-size: 100% 100%;
     box-sizing: border-box;
     user-select: none;
-    vertical-align: bottom;
-    }
+}
