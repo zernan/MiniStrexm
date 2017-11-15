@@ -4,11 +4,18 @@ import TopToolbar from './TopToolBar/TopToolbar';
 import ContentContainer from './ContentContainer/ContentContainer';
 
 class EditorWrapper extends Component {
-	render() {
+	constructor() {
+  	super()
+  }
+
+  	render() {
 
   	return (
       <div className="EditorWrapper">
-        {this.props.children}
+        <TopToolbar needsToBeSaved={this.props.needsToBeSaved}/>
+        <ContentContainer onToggle={this.props.onToggle} visibilityList={this.props.visibilityList}/>
+        {/*<TopToolbar needsToBeSaved={this.state['NeedsToBeSaved']}/>
+        <ContentContainer onToggle={this.handleChange} visibilityList={this.state}/>*/}
       </div>
     );
   }
