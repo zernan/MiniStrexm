@@ -7,6 +7,28 @@ import './index.css';
 import MiniStrexmApp from './components/MiniStrexmApp/MiniStrexmApp';
 
 import registerServiceWorker from './registerServiceWorker';
+import EditorWrapper from './components/EditorWrapper/EditorWrapper';
+
+class MiniStrexmApp2 extends Component {
+  
+  render() {
+
+  	const { visibilityList, onToggleVisibility } = this.props;
+  	
+    return (
+      <div className="MiniStrexmApp2">
+         <EditorWrapper onToggle={onToggleVisibility} visibilityList={visibilityList}/>
+      </div>
+    );
+  }
+}
+
+const visibilityState = {
+		Alerts:true,
+		TopBar:true,
+		BottomBar:true,
+		WebCam:true,
+		NeedsToBeSaved:false};
 
 // Actions:
 const actionToggle = {type: 'toggleVisibility'};
@@ -14,14 +36,16 @@ const actionToggle = {type: 'toggleVisibility'};
 // In reducer parameters you receive something along the lines of
 
 // Reducer:
-const toggler = (state, action)=> {
-	
+const toggler = (state={visibilityState}, action)=> {
+	let newState = {...state}
   switch(action.type){
     case 'toggleVisibility':
-      return {
-      	state[label]: !state[label], 
-      	state['NeedsToBeSaved']: true]
-      };
+    {
+      newState[''] = !newState['']
+      console.log(action.type + ' : ' + action + ' ' + newState[''])
+      return newState;
+      break;
+    }
     default:
       return state;
 	}
@@ -31,12 +55,7 @@ const toggler = (state, action)=> {
 
 
 //Store
-const store= createStore(toggler, {
-		Alerts: true, 
-  		TopBar: true, 
-  		BottomBar: true,   		
-      	WebCam:true,
-  		NeedsToBeSaved: false}, 
+const store= createStore(toggler, {visibilityState}, 
 	window.devToolsExtension ? window.devToolsExtension() : undefined);
 // The store is created with createStore and it only takes in one 
 // reducer so you will have to use combine reducer
@@ -47,23 +66,23 @@ const store= createStore(toggler, {
 //MapDispatchToProps
 const mapDispatchToProps = (dispatch)=> {
 	return {
-		onToggle: ()=> dispatch(actionToggle)
+		onToggleVisibility: ()=> dispatch(actionToggle)
 	}
 }
 //The only way to change the state inside it is to dispatch an action on it.
 
 //MapStateToProps
 const mapStateToProps = (state)=> {
-	return {
-		value:state
-	}
+	return 
+		value:state,
+		[console.log(state)];
 }
 
 // The above function maps the state to props.  So the reducer returns 
 // the new state, but the idea is to not have components carry any state.  
 // This means you take the new state provided by the reducer("provided" 
 // through "connect") and return it as props. Notice the returned object 
-// value?  That becomes similar to this.props.counter 
+// value?  That becomes similar to this.props.state 
 // providing the new state as it's value.
 
 
@@ -71,16 +90,13 @@ const mapStateToProps = (state)=> {
 const App = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(MiniStrexmApp)
+)(MiniStrexmApp2)
 // counter value from the connect(select) and dispatch by default from connect
 
 ReactDOM.render(
 	<Provider store={store}>
-		<App>
-			<MiniStrexmApp onToggle={this.onToggle}/>
-		</App>,
-		document.getElementById('root')
-	</Provider>
+		<App />
+	</Provider>, document.getElementById('root')
 	);
 
 registerServiceWorker();

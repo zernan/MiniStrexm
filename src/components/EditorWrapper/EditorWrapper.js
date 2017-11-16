@@ -9,11 +9,12 @@ class EditorWrapper extends Component {
   }
 
   	render() {
-
+       
   	return (
+
       <div className="EditorWrapper">
         <TopToolbar needsToBeSaved={this.props.needsToBeSaved}/>
-        <ContentContainer onToggle={this.props.onToggle} visibilityList={this.props.visibilityList}/>
+        <ContentContainer onToggle={this.props.onToggle} visibilityList={this.props.visibilityList} />
         {/*<TopToolbar needsToBeSaved={this.state['NeedsToBeSaved']}/>
         <ContentContainer onToggle={this.handleChange} visibilityList={this.state}/>*/}
       </div>

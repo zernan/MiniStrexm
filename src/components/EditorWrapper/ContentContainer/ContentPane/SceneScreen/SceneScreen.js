@@ -5,6 +5,8 @@ import ContentBottomBar from './ContentBottomBar/ContentBottomBar';
 import ContentWebCam from './ContentWebCam/ContentWebCam';
 import ContentAlert from './ContentAlerts/ContentAlert';
 
+const alertTypes = ['tip', 'follower', 'host', 'subscribe', 'cheer'];
+
 class SceneScreen extends Component {
   render() {
     let visibility = this.props.visibilityList;
@@ -12,7 +14,14 @@ class SceneScreen extends Component {
     return (
       
       <div className="SceneScreen">
-      	{this.props.children}
+      	<ContentTopbar visible={true}/>
+            <ContentAlert alert={alertTypes} visible={true}/>
+            <ContentWebCam visible={true}/>
+            <ContentBottomBar visible={true}/>
+            {/*<ContentTopbar visible={visibility['TopBar']}/>
+      			<ContentAlert alert={alertTypes} visible={visibility['Alerts']}/>
+      			<ContentWebCam visible={visibility['WebCam']}/>
+      			<ContentBottomBar visible={visibility['BottomBar']}/>*/}
       </div>
     )
   }

@@ -7,7 +7,7 @@ class ControllerPanel extends Component {
   render() {
     return (
       <div className="ControllerPanel" >
-      	<MenuPane toggleCheckbox={this.props.onToggle}/>
+      	<MenuPane onToggle={this.props.onToggle} />
       	<PropertiesPane />
       </div>
     )

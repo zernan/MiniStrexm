@@ -13,7 +13,8 @@ class MenuPane extends Component {
 		createCheckbox = label => (
     	<Checkbox
       		label={label}
-      		toggleCheck={(e)=>this.props.toggleCheckbox(label)}
+      		toggleCheck={(e)=>{
+            this.props.onToggle(label)}}
       		key={label}
     	/>
   	)
