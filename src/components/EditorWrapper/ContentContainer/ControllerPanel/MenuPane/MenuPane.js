@@ -6,15 +6,10 @@ const items = ['Alerts', 'TopBar', 'BottomBar', 'WebCam'];
 
 class MenuPane extends Component {
 
-	constructor(){
-		super()
-	}
-
 		createCheckbox = label => (
     	<Checkbox
       		label={label}
-      		toggleCheck={(e)=>{
-            this.props.onToggle(label)}}
+      		toggleCheck={(e)=>{this.props.onToggle(label)}}
       		key={label}
     	/>
   	)
@@ -24,6 +19,7 @@ class MenuPane extends Component {
   	)
 
   render() {
+    
     return (
       <div className="MenuPane">
         	{this.createCheckboxes()}

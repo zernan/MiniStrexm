@@ -4,58 +4,66 @@ import { createStore } from 'redux';
 import { Provider, connect } from 'react-redux';
 
 import './index.css';
-import MiniStrexmApp from './components/MiniStrexmApp/MiniStrexmApp';
+//import MiniStrexmApp from './components/MiniStrexmApp/MiniStrexmApp';
 
 import registerServiceWorker from './registerServiceWorker';
 import EditorWrapper from './components/EditorWrapper/EditorWrapper';
 
-class MiniStrexmApp2 extends Component {
+
+const defaultStateList = {
+		Alerts:true,
+		TopBar:true,
+		BottomBar:true,
+		WebCam:true,
+		NeedsToBeSaved:false
+	};
+
+class MiniStrexmApp extends Component {
   
   render() {
 
-  	const { visibilityList, onToggleVisibility } = this.props;
+  	const { stateList, onToggle} = this.props;
   	
-    return (
-      <div className="MiniStrexmApp2">
-         <EditorWrapper onToggle={onToggleVisibility} visibilityList={visibilityList}/>
+  	return (
+      <div className="MiniStrexmApp">
+         <EditorWrapper onToggle={onToggle} stateList={stateList}/>
       </div>
     );
   }
 }
 
-const visibilityState = {
-		Alerts:true,
-		TopBar:true,
-		BottomBar:true,
-		WebCam:true,
-		NeedsToBeSaved:false};
+/*const toggleState = (label) => {
+	
+	defaultStateList[label] = !defaultStateList[label];
+	
+	return defaultStateList;
+};*/
 
 // Actions:
-const actionToggle = {type: 'toggleVisibility'};
+const actionToggle = (label) => ({type: 'toggleVisibility', payload:{label}});
 // The type isn't necessarily a requirement but I wouldn't recommend actions without it
 // In reducer parameters you receive something along the lines of
 
 // Reducer:
-const toggler = (state={visibilityState}, action)=> {
-	let newState = {...state}
+const toggler = (state, action)=> {
+  console.log(action);
+  state = {...defaultStateList};
   switch(action.type){
     case 'toggleVisibility':
     {
-      newState[''] = !newState['']
-      console.log(action.type + ' : ' + action + ' ' + newState[''])
-      return newState;
+      return state;
       break;
     }
+
     default:
       return state;
 	}
 }
-
 // If you don't return the new state then nothing gets sent.
 
 
 //Store
-const store= createStore(toggler, {visibilityState}, 
+const store = createStore(toggler, {defaultStateList}, 
 	window.devToolsExtension ? window.devToolsExtension() : undefined);
 // The store is created with createStore and it only takes in one 
 // reducer so you will have to use combine reducer
@@ -66,18 +74,17 @@ const store= createStore(toggler, {visibilityState},
 //MapDispatchToProps
 const mapDispatchToProps = (dispatch)=> {
 	return {
-		onToggleVisibility: ()=> dispatch(actionToggle)
+		onToggle: (label)=> dispatch(actionToggle(label))
 	}
 }
 //The only way to change the state inside it is to dispatch an action on it.
 
 //MapStateToProps
 const mapStateToProps = (state)=> {
+	console.log('Alerts' + state['Alerts'])
 	return 
-		value:state,
-		[console.log(state)];
+		stateList:state;
 }
-
 // The above function maps the state to props.  So the reducer returns 
 // the new state, but the idea is to not have components carry any state.  
 // This means you take the new state provided by the reducer("provided" 
@@ -90,8 +97,8 @@ const mapStateToProps = (state)=> {
 const App = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(MiniStrexmApp2)
-// counter value from the connect(select) and dispatch by default from connect
+)(MiniStrexmApp)
+// value from the connect(select) and dispatch by default from connect
 
 ReactDOM.render(
 	<Provider store={store}>

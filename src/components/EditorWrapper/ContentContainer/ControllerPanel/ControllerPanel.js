@@ -4,10 +4,15 @@ import MenuPane from './MenuPane/MenuPane';
 import PropertiesPane from './PropertiesPane/PropertiesPane'
 
 class ControllerPanel extends Component {
+
+	constructor(){
+		super()
+	}
+  
   render() {
-    return (
+  	return (
       <div className="ControllerPanel" >
-      	<MenuPane onToggle={this.props.onToggle} />
+      	<MenuPane onToggle={this.props.onToggle}/>
       	<PropertiesPane />
       </div>
     )

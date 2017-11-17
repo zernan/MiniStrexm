@@ -17,7 +17,7 @@ class MiniStrexmApp extends Component {
           <h1 className="App-title">MiniStrexmApp</h1>
         </header>
          <EditorWrapper onToggle={this.props.onToggle} 
-            visibilityList={this.props.visibilityList}/>
+            stateList={this.props.stateList}/>
       </div>
     );
   }

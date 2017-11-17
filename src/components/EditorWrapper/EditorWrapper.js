@@ -13,10 +13,8 @@ class EditorWrapper extends Component {
   	return (
 
       <div className="EditorWrapper">
-        <TopToolbar needsToBeSaved={this.props.needsToBeSaved}/>
-        <ContentContainer onToggle={this.props.onToggle} visibilityList={this.props.visibilityList} />
-        {/*<TopToolbar needsToBeSaved={this.state['NeedsToBeSaved']}/>
-        <ContentContainer onToggle={this.handleChange} visibilityList={this.state}/>*/}
+        <TopToolbar needsToBeSaved={this.props.stateList == undefined ? false : this.props.stateList['NeedsToBeSaved']}/>
+        <ContentContainer onToggle={this.props.onToggle} stateList={this.props.stateList} />
       </div>
     );
   }

@@ -9,8 +9,8 @@ class ContentContainer extends Component {
   render() {
    	return (
       <div className="ContentContainer">
-      	<ControllerPanel onToggle={this.props.onToggle} />
-        <ContentPane visibilityList={this.props.visibilityList} />
+      	<ControllerPanel onToggle={this.props.onToggle} stateList={this.props.stateList}/>
+        <ContentPane stateList={this.props.stateList} />
       </div>
 
     )
