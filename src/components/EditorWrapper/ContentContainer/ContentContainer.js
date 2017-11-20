@@ -5,11 +5,11 @@ import ControllerPanel from './ControllerPanel/ControllerPanel'
 
 class ContentContainer extends Component {
   
-  
   render() {
+  	
    	return (
       <div className="ContentContainer">
-      	<ControllerPanel onToggle={this.props.onToggle} stateList={this.props.stateList}/>
+      	<ControllerPanel onToggle={this.props.onToggle} /> {/*stateList={this.props.stateList}/>*/}
         <ContentPane stateList={this.props.stateList} />
       </div>
 

@@ -8,12 +8,12 @@ class ContentPane extends Component {
 	}
 	
   render() {
-    
+        
     return (
 
       <div className="ContentPane">
    			CONTENT PANE
-   			<SceneScreen visibilityList={this.props.visibilityList}/>
+   			<SceneScreen stateList={this.props.stateList}/>
       </div>
     );
   }

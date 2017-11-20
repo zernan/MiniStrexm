@@ -2,17 +2,13 @@ import React, { Component } from 'react';
 import './ContentAlert.css';
 
 class ContentAlert extends Component {
-  constructor() {
-  	super(),
-  	this.state = {isHidden:false, alertType: ''}
-  }
   
   render() {
     if(this.props.visible == true)
     {
     return (
       <div className="ContentAlert">
-        	ALERT : You received a {this.props.alert[0]} !!!
+        	ALERT : You received a {this.props.alert[1]} !!!
       </div>
     );
     }

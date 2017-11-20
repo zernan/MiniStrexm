@@ -3,16 +3,16 @@ import './ContentWebCam.css';
 
 class ContentWebCam extends Component {
   
-  constructor() {
-		super(),
-		this.state = { isHidden : false }
-  }
-
   render() {
+    const handleClick=()=>{ 
+    alert('MAKE DRAGGABLE');
+    console.log('webcam element clicked!')
+  };
+
     if(this.props.visible == true)
     {
     return (
-      <div className="ContentWebCam">
+      <div className="ContentWebCam" onClick={handleClick}>
         	WebCam
       </div>
     );

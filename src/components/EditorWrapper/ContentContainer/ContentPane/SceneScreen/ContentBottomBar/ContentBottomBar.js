@@ -6,11 +6,6 @@ const socialItems = ['facebook', 'twitter', 'player.me'];
 
 class ContentBottomBar extends Component {
   
-  constructor() {
-		super(),
-		this.state = { isHidden : false }
-  }
-
   createSocialItem = label => (
     	<SocialItem
       		label={label}

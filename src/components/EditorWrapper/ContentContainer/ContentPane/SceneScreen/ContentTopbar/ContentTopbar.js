@@ -5,10 +5,6 @@ import ContentTopbarUsername from './ContentTopbarUsername/ContentTopbarUsername
 import ContentTopbarTip from './ContentTopbarTip/ContentTopbarTip';
 
 class ContentTopbar extends Component {
-  constructor() {
-  	super(),
-  	this.state = {isHidden:false}
-  }
   
   render() {
     if(this.props.visible == true)

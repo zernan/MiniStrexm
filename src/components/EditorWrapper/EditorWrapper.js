@@ -4,12 +4,9 @@ import TopToolbar from './TopToolBar/TopToolbar';
 import ContentContainer from './ContentContainer/ContentContainer';
 
 class EditorWrapper extends Component {
-	constructor() {
-  	super()
-  }
-
+	
   	render() {
-       
+             
   	return (
 
       <div className="EditorWrapper">
