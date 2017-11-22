@@ -9,11 +9,12 @@ class SceneScreen extends Component {
   render() {
     
     let stateList = this.props.stateList;
-    let alertTypes = stateList == undefined ? [] : stateList['AlertTypes'];
+    let alertTypes = stateList === undefined ? [] : stateList['AlertTypes'];
+    let background = stateList['Background'];
     
     return (
       
-      <div className="SceneScreen">
+      <div className="SceneScreen" style ={ { backgroundImage: 'url('+background+')'}}>
       	    <ContentTopbar visible={stateList['TopBar']}/>
       			<ContentAlert alert={alertTypes} visible={stateList['Alerts']}/>
       			<ContentWebCam visible={stateList['WebCam']}/>

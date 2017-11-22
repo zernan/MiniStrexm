@@ -7,7 +7,7 @@ import ContentTopbarTip from './ContentTopbarTip/ContentTopbarTip';
 class ContentTopbar extends Component {
   
   render() {
-    if(this.props.visible == true)
+    if(this.props.visible === true)
     {
     return (
       <div className="ContentTopbar">

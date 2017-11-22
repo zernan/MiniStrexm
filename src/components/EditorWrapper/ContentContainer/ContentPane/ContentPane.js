@@ -13,7 +13,7 @@ class ContentPane extends Component {
 
       <div className="ContentPane">
    			CONTENT PANE
-   			<SceneScreen stateList={this.props.stateList}/>
+   			<SceneScreen stateList={this.props.stateList} />
       </div>
     );
   }

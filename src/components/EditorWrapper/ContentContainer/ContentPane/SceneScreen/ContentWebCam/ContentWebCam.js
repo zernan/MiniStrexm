@@ -9,7 +9,7 @@ class ContentWebCam extends Component {
     console.log('webcam element clicked!')
   };
 
-    if(this.props.visible == true)
+    if(this.props.visible === true)
     {
     return (
       <div className="ContentWebCam" onClick={handleClick}>

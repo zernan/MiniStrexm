@@ -5,6 +5,14 @@ class TopToolbar extends Component {
   constructor()
   {
 	super()
+	this.handleChangeBackground = this.handleChangeBackground.bind(this)
+  }
+
+  handleChangeBackground (e) {
+  	console.log('handle changeBackground')
+    const {changeBackground} = this.props;
+
+    changeBackground();
   }
   
   render() {
@@ -17,6 +25,7 @@ class TopToolbar extends Component {
 	      <div className="TopToolbar">
 	        	<span>
 	        	<input type='button' value='SAVE'></input>
+	        	<input type='button' value='CHANGE BACKGROUND' onClick={this.handleChangeBackground}></input>
 	        	</span>
 	      </div>
 	    );
@@ -27,6 +36,7 @@ class TopToolbar extends Component {
 	      <div className="TopToolbar">
 	        	<span>
 	        	<input type='button' value='SAVE' disabled></input>
+	        	<input type='button' value='CHANGE BACKGROUND' onClick={this.handleChangeBackground}></input>
 	        	</span>
 	      </div>
 	    );

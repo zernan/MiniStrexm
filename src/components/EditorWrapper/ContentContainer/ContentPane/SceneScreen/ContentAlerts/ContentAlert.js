@@ -4,7 +4,7 @@ import './ContentAlert.css';
 class ContentAlert extends Component {
   
   render() {
-    if(this.props.visible == true)
+    if(this.props.visible === true)
     {
     return (
       <div className="ContentAlert">
