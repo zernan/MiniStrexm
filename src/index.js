@@ -4,7 +4,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import { takeEvery, takeLatest } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import { put, call } from 'redux-saga/effects'
+import { put, call, select } from 'redux-saga/effects'
 import createSagaMiddleware from 'redux-saga'
 import {PropTypes} from 'prop-types'
 import './index.css';
@@ -35,16 +35,17 @@ const CHANGE_ALERT = 'e.CREATE_ALERT'
 const DISPLAY_ALERT = 'e.DISPLAY_ALERT'
 const CHANGE_BACKGROUND_SCENE = 'e.CHANGE_BACKGROUND_SCENE'
 const DISPLAY_BACKGROUND_SCENE = 'e.DISPLAY_BACKGROUND_SCENE'
+const AUTO_SAVE = 'e.AUTO_SAVE'
 
 let counter=0;
-
+let toggleCounter=1;
 // Action Creators
 const actionToggle = (label) => ({
-	type: TOGGLE_VISIBILITY, payload:{label}
+	type: TOGGLE_VISIBILITY, label
 });
 
 const displayVisibility = (label) => ({
-	type: DISPLAY_VISIBILITY, payload:{label}
+	type: DISPLAY_VISIBILITY, label
 })
 
 const displayAlert = (alertType) => ({
@@ -55,13 +56,14 @@ const createAlert = (seconds) => ({
 	type: CHANGE_ALERT, seconds
 });
 
-const changeBackground = (seconds) => ({
-	type:CHANGE_BACKGROUND_SCENE, seconds
+const changeBackground = (index) => ({
+	type:CHANGE_BACKGROUND_SCENE, index
 });
 
-const displayScene = (url) => ({
-	type:DISPLAY_BACKGROUND_SCENE, url
+const autoSave = () => ({
+  type:AUTO_SAVE
 });
+
 // The type isn't necessarily a requirement but I wouldn't recommend actions without it
 // In reducer parameters you receive something along the lines of
 
@@ -84,46 +86,50 @@ const defaultStateList = {
 // Reducer:
 const toggler = (state=defaultStateList, action)=> {
   
-  let label = action.payload === undefined ? null : action.payload.label;
   let newState = {...state};
   
   newState['NeedsToBeSaved'] = true; //any actions would enabled the save button
   
   switch(action.type){
-    case DISPLAY_VISIBILITY:
+    case TOGGLE_VISIBILITY:
     {
-    	console.log('display visibility')
+      toggleCounter++ 
+    	let label = action === undefined ? null : action.label;
+    	console.log('toggle visibility')
     	console.log(action)
-
+      console.log(action.label)
+    	console.log(label)
+    	
       if(label != null){
   	
   		newState[label] = !state[label];
   		
-  		/*if(newState['Alerts'] === false && newState['TopBar'] === false 
-  			&& newState['BottomBar'] === false && newState['WebCam'] === false) {
-	  			
-	  			//newState['Background'] = backgroundImages[counter%6];
-	  			
-	  			console.log(counter);
-	  		}*/
-  		}
-
-  	  counter++;
-      return newState;
+  	}
+	  
+	  console.log(newState)
+  	  return newState;
+    }
+    
+    case AUTO_SAVE: {
+      if( (toggleCounter%10) == 0){
+        
+        alert('PROJECT SAVED AUTOMATICALLY!')
+      }
     }
 
-    case DISPLAY_ALERT: {
-    
-      return  
-      	newState;
+    case CHANGE_BACKGROUND_SCENE: {
+    	
+    	if(newState['Alerts'] === false && newState['TopBar'] === false 
+  			&& newState['BottomBar'] === false && newState['WebCam'] === false) {
+	  			counter++
+	  			newState['Background'] = backgroundImages[counter%6];
+	  			console.log('counter: ' + counter)
+	  			console.log('new State unchecked all');
+	  		}
+
+    	return newState;
     }
       
-    case DISPLAY_BACKGROUND_SCENE: {
-      const {url} = action;
-      newState['Background'] = url;
-      return newState;
-	}
-
     default:
       return state;
 	}
@@ -132,52 +138,19 @@ const toggler = (state=defaultStateList, action)=> {
 
 // Create a saga
 function* rootSaga() {
-  // Catch all actions with type CREATE_BACKGROUND_SCENE
-  // This would take every CREATE_BACKGROUND_SCENE action type
-  
-  yield takeEvery(TOGGLE_VISIBILITY, sagaDisplayVisibility)
-  //yield takeEvery(CHANGE_BACKGROUND_SCENE, sagaChangeBackground)
-  
-  // Catch all actions with type CHANGE_ALERT
-  // takeLatest will only take the last action type CHANGE_ALERT and
-  // the others that were not completed before the latest
-  // will be cancelled
-  yield takeLatest(CHANGE_ALERT, sagaChangeAlert)
+    [yield takeEvery(TOGGLE_VISIBILITY, sagaAutoSave),
+    yield takeLatest(TOGGLE_VISIBILITY, sagaVerifyCheckboxes)]
 }
 
-// Function to be called by saga taking action CHANGE_ALERT
-// The data that was passed in the action creator will also be passed to saga
-function* sagaChangeAlert(payload) {
-  const { seconds } = payload
-  
-  // Wait after how many seconds
-  yield delay(seconds * 1000)
-  
-  // Dispatch an action with type DISPLAY_ALERT
-  // redux-saga "put" effect acts as a redux dispatch
-  yield put({ type: DISPLAY_ALERT })
+function* sagaAutoSave() {
+  console.log('sagaAutoSave')
+
+  yield put({ type: AUTO_SAVE })
 }
 
-function* sagaChangeBackground(payload) {
-  const { seconds } = payload
-  console.log('change background')
-  console.log(payload)
-  // Wait after how many seconds
-  yield delay(seconds * 1000)
-  
-  // Dispatch an action with type DISPLAY_BACKGROUND_SCENE
-  // redux-saga "put" effect acts as a redux dispatch
-  const url = yield call(getImageURL,seconds%6)
-  console.log(url)
-  yield put({ type: DISPLAY_BACKGROUND_SCENE, url})
-}
-
-function* sagaDisplayVisibility(payload) {
-	
-	console.log('sagaDisplayVisibility')
-	console.log(payload)
-	
-	yield put({ type: DISPLAY_VISIBILITY, payload})
+function* sagaVerifyCheckboxes() {
+	console.log('sagaVerifyCheckboxes')
+	yield put({ type: CHANGE_BACKGROUND_SCENE })
 }
 
 // Declare some function that would return the url of the background image
