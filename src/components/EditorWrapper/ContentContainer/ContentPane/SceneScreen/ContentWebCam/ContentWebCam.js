@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+
+import { DragSource } from 'react-dnd';
+
 import './ContentWebCam.css';
 
-class ContentWebCam extends Component {
+export default class ContentWebCam extends Component {
   
   render() {
     const handleClick=()=>{ 
@@ -21,4 +24,16 @@ class ContentWebCam extends Component {
   }
 }
 
-export default ContentWebCam;
+const webcamDragSource = {
+  beginDrag: function() {
+    return {}
+  }
+}
+
+/*export default DragSource('DRAG_WEBCAM', webcamDragSource,
+    function(connect) {
+      return {
+        connectDragSource: connect.dragSource()
+      }
+    })(ContentWebCam);*/
+

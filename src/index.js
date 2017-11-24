@@ -7,9 +7,12 @@ import { delay } from 'redux-saga'
 import { put, call, select } from 'redux-saga/effects'
 import createSagaMiddleware from 'redux-saga'
 import {PropTypes} from 'prop-types'
+
+import HTML5Backend from 'react-dnd-html5-backend';
+import {DragSource, DragDropContext, DropTarget, DragLayer} from 'react-dnd';
+
 import './index.css';
 import logo from './logo.svg';
-
 import EditorWrapper from './components/EditorWrapper/EditorWrapper';
 
 /*const { Component } = React
@@ -23,7 +26,7 @@ const { PropTypes} = PropTypes*/
 //backround image array
 const backgroundImages = ['https://files.gamebanana.com/img/ss/skins/566eb67915eb3.jpg',
 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1P8trD3eAUtwtaocu9kUs976HlEpRrDSRk_-ZULA-93o3Cdtr',
-'https://cdn.vox-cdn.com/thumbor/2kMpjra_1_00sINmfZkwnua7j3Y=/0x0:1536x864/1600x900/cdn.vox-cdn.com/uploads/chorus_image/image/49944189/csgo.0.0.jpg',
+'https://pbs.twimg.com/media/CzeoyJAXAAADm6y.jpg:large',
 'https://i.ytimg.com/vi/6nhdR_Hda0g/maxresdefault.jpg',
 'https://steamuserimages-a.akamaihd.net/ugc/882984447753219894/D947D4FA6CC0CA4D3DE8D67D8B40A3EFC462EE19/?interpolation=lanczos-none&output-format=jpeg&output-quality=95&fit=inside%7C637%3A358&composite-to=*,*%7C637%3A358&background-color=black',
 'https://vignette.wikia.nocookie.net/cswikia/images/6/6f/Csgo-de-dust2.png/revision/latest?cb=20140820131233']
@@ -38,7 +41,7 @@ const DISPLAY_BACKGROUND_SCENE = 'e.DISPLAY_BACKGROUND_SCENE'
 const AUTO_SAVE = 'e.AUTO_SAVE'
 
 let counter=0;
-let toggleCounter=1;
+
 // Action Creators
 const actionToggle = (label) => ({
 	type: TOGGLE_VISIBILITY, label
@@ -93,8 +96,7 @@ const toggler = (state=defaultStateList, action)=> {
   switch(action.type){
     case TOGGLE_VISIBILITY:
     {
-      toggleCounter++ 
-    	let label = action === undefined ? null : action.label;
+      let label = action === undefined ? null : action.label;
     	console.log('toggle visibility')
     	console.log(action)
       console.log(action.label)
@@ -111,21 +113,12 @@ const toggler = (state=defaultStateList, action)=> {
     }
     
     case AUTO_SAVE: {
-      if( (toggleCounter%10) == 0){
-        
-        alert('PROJECT SAVED AUTOMATICALLY!')
-      }
+      alert('PROJECT SAVED AUTOMATICALLY!')
     }
 
     case CHANGE_BACKGROUND_SCENE: {
     	
-    	if(newState['Alerts'] === false && newState['TopBar'] === false 
-  			&& newState['BottomBar'] === false && newState['WebCam'] === false) {
-	  			counter++
-	  			newState['Background'] = backgroundImages[counter%6];
-	  			console.log('counter: ' + counter)
-	  			console.log('new State unchecked all');
-	  		}
+    	newState['Background'] = backgroundImages[counter%6];
 
     	return newState;
     }
@@ -138,19 +131,31 @@ const toggler = (state=defaultStateList, action)=> {
 
 // Create a saga
 function* rootSaga() {
-    [yield takeEvery(TOGGLE_VISIBILITY, sagaAutoSave),
-    yield takeLatest(TOGGLE_VISIBILITY, sagaVerifyCheckboxes)]
+    [yield takeLatest(TOGGLE_VISIBILITY, sagaVerifyCheckboxes),
+    yield takeLatest(CHANGE_BACKGROUND_SCENE, sagaAutoSave)]
 }
 
 function* sagaAutoSave() {
   console.log('sagaAutoSave')
 
-  yield put({ type: AUTO_SAVE })
+  if( counter>0 && (counter%2)==0) {
+    yield put({ type: AUTO_SAVE })
+  }
 }
 
 function* sagaVerifyCheckboxes() {
 	console.log('sagaVerifyCheckboxes')
-	yield put({ type: CHANGE_BACKGROUND_SCENE })
+  const currentState = store.getState();
+  console.log(currentState)
+  if(currentState['Alerts'] == false && currentState['TopBar'] == false 
+        && currentState['BottomBar'] == false && currentState['WebCam'] == false) {
+          counter++
+          console.log('counter: ' + counter)
+          console.log('new State unchecked all');
+          store.dispatch({ type: CHANGE_BACKGROUND_SCENE })
+          
+          //yield put({ type: CHANGE_BACKGROUND_SCENE })
+  }
 }
 
 // Declare some function that would return the url of the background image
@@ -204,7 +209,6 @@ class MiniStrexmApp extends Component {
   }
 }
 
-
 //MapDispatchToProps
 const mapDispatchToProps = (dispatch)=> {
 	return {
@@ -241,6 +245,8 @@ const Main = () => (
     <App />
   </Provider>
 )
+
+//export default DragDropContext(HTML5Backend)(Main);
 
 ReactDOM.render( <Main />, document.getElementById('root'))
 
