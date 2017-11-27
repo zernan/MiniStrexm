@@ -1,6 +1,6 @@
 .ContentBottomBar { 
     position: absolute;
-    bottom:10px;
+    top:500px;
     display: flex;
     -ms-flex-align: justify-content;
     align-items: center;

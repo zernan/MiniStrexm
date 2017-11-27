@@ -7,9 +7,7 @@ import { delay } from 'redux-saga'
 import { put, call, select } from 'redux-saga/effects'
 import createSagaMiddleware from 'redux-saga'
 import {PropTypes} from 'prop-types'
-
-import HTML5Backend from 'react-dnd-html5-backend';
-import {DragSource, DragDropContext, DropTarget, DragLayer} from 'react-dnd';
+import Draggable from 'react-draggable'
 
 import './index.css';
 import logo from './logo.svg';
@@ -152,9 +150,10 @@ function* sagaVerifyCheckboxes() {
           counter++
           console.log('counter: ' + counter)
           console.log('new State unchecked all');
-          store.dispatch({ type: CHANGE_BACKGROUND_SCENE })
           
-          //yield put({ type: CHANGE_BACKGROUND_SCENE })
+          //store.dispatch({ type: CHANGE_BACKGROUND_SCENE })
+          
+          yield put({ type: CHANGE_BACKGROUND_SCENE })
   }
 }
 
@@ -186,11 +185,11 @@ class MiniStrexmApp extends Component {
   	this.handleAsyncChangeBackground = this.handleAsyncChangeBackground.bind(this)
   }
 
-  handleAsyncChangeBackground(seconds) {
-    // Call the asyncIncrement action and pass the parameter seconds
+  handleAsyncChangeBackground(index) {
+    // Call the asyncIncrement action
     console.log('handle async');
     console.log(this.props.changeBackground);
-    this.props.changeBackground(seconds);
+    this.props.changeBackground(index);
   }
   
   render() {
@@ -213,7 +212,7 @@ class MiniStrexmApp extends Component {
 const mapDispatchToProps = (dispatch)=> {
 	return {
 		onToggle: (label)=> dispatch(actionToggle(label)),
-		changeBackground: (seconds) => dispatch(changeBackground(seconds))
+		changeBackground: (index) => dispatch(changeBackground(index))
 	}
 } 
 //The only way to change the state inside it is to dispatch an action on it.
@@ -245,8 +244,6 @@ const Main = () => (
     <App />
   </Provider>
 )
-
-//export default DragDropContext(HTML5Backend)(Main);
 
 ReactDOM.render( <Main />, document.getElementById('root'))
 
