@@ -81,7 +81,9 @@ const defaultStateList = {
 		WebCamLocation: { top:0, left:0 }, //relocating webcam from topleft corner
 		Background: backgroundImages[0], //initial background scene CSGO
 		AlertTypes: ['Tip', 'Follower', 'Host', 'Subscribe', 'Cheer'], // kind of alert items
-		NeedsToBeSaved:false // save button from top toolbar, will do multiple things when pressed
+		NeedsToBeSaved:false, // save button from top toolbar, will do multiple things when pressed
+    hasError:false, // error boundary implementation
+    tooltipVisible:false //for tooltip on various display elements
 	};
 
 // Reducer:
@@ -198,15 +200,19 @@ class MiniStrexmApp extends Component {
   	
   	return (
   	  <div className="MiniStrexmApp">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">MiniStrexmApp</h1>
-        </header>
-         <EditorWrapper onToggle={onToggle} stateList={stateList} changeBackground={()=>this.handleAsyncChangeBackground(counter) }/>
+        
+           <EditorWrapper onToggle={onToggle} stateList={stateList} 
+                 changeBackground={()=>this.handleAsyncChangeBackground(counter) }/>
       </div>
     );
   }
 }
+
+/*
+<header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">MiniStrexmApp</h1>
+        </header>*/
 
 //MapDispatchToProps
 const mapDispatchToProps = (dispatch)=> {

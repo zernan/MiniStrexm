@@ -8,7 +8,7 @@ class ContentAlert extends Component {
     {
     return (
       <div className="ContentAlert">
-        	ALERT : You received a {this.props.alert[1]} !!!
+          ALERT: You received a {this.props.alert[1]} !!!
       </div>
     );
     }

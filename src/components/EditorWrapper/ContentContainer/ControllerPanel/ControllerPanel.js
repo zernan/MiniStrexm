@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './ControllerPanel.css';
 import MenuPane from './MenuPane/MenuPane';
 import PropertiesPane from './PropertiesPane/PropertiesPane'
+import ErrorBoundary from '../../../ErrorBoundary'
 
 class ControllerPanel extends Component {
 
@@ -11,9 +12,13 @@ class ControllerPanel extends Component {
   
   render() {
   	return (
-      <div className="ControllerPanel" >
-      	<MenuPane onToggle={this.props.onToggle}/>
-      	<PropertiesPane />
+      <div className="ControllerPanel">
+        <ErrorBoundary childName='menupane'>
+      	   <MenuPane onToggle={this.props.onToggle}/>
+        </ErrorBoundary>
+        <ErrorBoundary childName='propertiespane'>
+      	   <PropertiesPane id='properties-pane'/>
+        </ErrorBoundary>
       </div>
     )
   }

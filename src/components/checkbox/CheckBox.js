@@ -3,8 +3,8 @@ import React, { Component} from 'react';
 class Checkbox extends Component {
   constructor()
   {
-    super(),
-    this.handleCheckboxChange = this.handleCheckboxChange.bind(this),
+    super()
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this)
     this.state = { isChecked: true }
   }
 
