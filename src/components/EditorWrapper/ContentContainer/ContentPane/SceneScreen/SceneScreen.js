@@ -12,14 +12,13 @@ import Tooltip from '../../../../Tooltip'
 
 class SceneScreen extends Component {
   
-  
-  render() {
+    render() {
 
     const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
     
     let stateList = this.props.stateList;
-    let alertTypes = stateList === undefined ? [] : stateList['AlertTypes'];
-    let background = stateList['Background'];
+    let alertTypes = stateList.toggler === undefined ? [] : stateList.toggler['AlertTypes'];
+    let background = stateList.background['Background'];
     
     return (
         <div className="SceneScreen" id='scene-screen' style ={ { backgroundImage: 'url('+background+')'}}>
@@ -27,7 +26,7 @@ class SceneScreen extends Component {
               <Draggable bounds={{top:0, bottom: 50}} axis='y' {...dragHandlers}>
                 <div>
                 <Tooltip text='This top bar has very limited movability, just enough to see most of the details'>
-                  <ContentTopbar visible={stateList['TopBar']}/>
+                  <ContentTopbar visible={stateList.toggler['TopBar']}/>
                 </Tooltip>  
         			 </div>
               </Draggable>
@@ -39,7 +38,7 @@ class SceneScreen extends Component {
                 <Tooltip text='Alerts have 5 different types: Tip, Follower, Host, Subscribe and Cheer. 
                                 They will pop up immediately upon receipt. 
                                 Make sure you position them during design mode in a way that they will not impede your view'>
-                  <ContentAlert alert={alertTypes} visible={stateList['Alerts']}/>
+                  <ContentAlert alert={alertTypes} visible={stateList.toggler['Alerts']}/>
                   </Tooltip>
                 </div>
               </Draggable>
@@ -49,7 +48,7 @@ class SceneScreen extends Component {
               <Draggable  {...dragHandlers}>
                 <div>
                  <Tooltip text='Make sure to position this that it would not hinder your view!'>
-          			   <ContentWebCam visible={stateList['WebCam']}/>
+          			   <ContentWebCam visible={stateList.toggler['WebCam']}/>
                  </Tooltip>
                 </div>
               </Draggable>
@@ -60,7 +59,7 @@ class SceneScreen extends Component {
                 <div>
                 <Tooltip text='This bottom bar have limited vertical movability, 
                             just enough so that you can see the details that might be behind it'>
-                  <ContentBottomBar visible={stateList['BottomBar']}/>
+                  <ContentBottomBar visible={stateList.toggler['BottomBar']}/>
                 </Tooltip>
                 </div>
               </Draggable>

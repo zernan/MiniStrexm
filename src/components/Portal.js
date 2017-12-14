@@ -11,14 +11,14 @@ class Portal extends React.PureComponent {
   componentDidMount() {
     let element = document.getElementById('scene-screen')
     element.appendChild(this.el)
-    console.log(document.body)
-    console.log(this.el)
+    //console.log(document.body)
+    //console.log(this.el)
   }
 
   componentWillUnmount() {
     let element = document.getElementById('scene-screen')
     element.removeChild(this.el)
-    console.log(document.body)
+    //console.log(document.body)
   }
  
   render() {

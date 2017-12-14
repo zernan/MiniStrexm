@@ -23,7 +23,7 @@ class Tooltip extends React.PureComponent {
     const style = { width: this.width, background:'white', position:'relative'}; // this style object will be passed as the tooltip's 'style' prop
     //console.log(style)
     const dimensions = this.el.getBoundingClientRect(); // where on the screen is the target
-    console.log(dimensions)
+    //console.log(dimensions)
     // center align the tooltip by taking both the target and tooltip widths into account
     style.left = (dimensions.left + (dimensions.width / 2)) - (this.width / 2);
     style.left = Math.max(this.space, style.left); // make sure it doesn't poke off the left side of the page
@@ -38,7 +38,7 @@ class Tooltip extends React.PureComponent {
       style.bottom = (window.innerHeight - dimensions.top) + this.space;
     }
     
-    console.log(style)
+    //console.log(style)
     
     this.setState({
       visible: true,
