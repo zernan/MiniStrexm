@@ -16,7 +16,8 @@ import EditorWrapper from './components/EditorWrapper/EditorWrapper';
 import * as Actions from './redux/modules/actions'
 import { actionToggle, displayVisibility, displayAlert, createAlert, changeBackground, autoSave } from './redux/modules/actionCreators'
 import { toggler, sagaMiddleware } from './redux/reducer'
-import { store } from './redux/reducer'
+import store from './redux/store'
+import {sagaMiddleWare, rootSaga} from './redux/reducer'
 import MiniStrexmApp from './components/MiniStrexmApp/MiniStrexmApp'
 
 //MapDispatchToProps
@@ -54,5 +55,8 @@ const Main = () => (
     <App />
   </Provider>
 )
+
+// Run the saga
+sagaMiddleware.run(rootSaga)
 
 ReactDOM.render( <Main />, document.getElementById('root'))
